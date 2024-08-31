@@ -1,0 +1,14 @@
+<IfModule authz_core_module>
+    Require all granted
+</IfModule>
+<IfModule !authz_core_module>
+    Allow from all
+</IfModule>
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+    RewriteCond $1 !^(index\.php|images|captcha|data|include|uploads|css|js|robots\.txt|favicon\.ico)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /index.php/$1 [L]
+</IfModule>
